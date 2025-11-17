@@ -1,0 +1,41 @@
+{
+  "packages": [
+    "nodejs@20",
+    "python@3.11"
+  ],
+  "shell": {
+    "init_hook": [
+      "echo 'Welcome to FeastFox development environment!'",
+      "echo 'Node: $(node --version)'",
+      "echo 'Python: $(python --version)'",
+      "echo ''",
+      "echo 'Available commands:'",
+      "echo '  Frontend: cd frontend && npm run dev'",
+      "echo '  Backend:  cd backend && uvicorn main:app --reload'",
+      "echo '  Services: devbox services up'",
+      "echo ''"
+    ],
+    "scripts": {
+      "install-frontend": [
+        "cd frontend && npm install"
+      ],
+      "install-backend": [
+        "cd backend && pip install -r requirements.txt"
+      ],
+      "setup": [
+        "npm install --prefix frontend",
+        "pip install -r backend/requirements.txt"
+      ]
+    }
+  },
+  "services": {
+    "frontend": {
+      "command": "cd frontend && npm run dev -- --host 0.0.0.0",
+      "depends_on": []
+    },
+    "backend": {
+      "command": "cd backend && python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000",
+      "depends_on": []
+    }
+  }
+}
