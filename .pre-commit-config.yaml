@@ -1,7 +1,20 @@
--   repo: local
+---
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.0  # Ruff Version
     hooks:
-    -   id: jfrog
+      - id: ruff
+  - repo: https://github.com/gitguardian/ggshield
+    rev: v1.43.0  # GGShield Version
+    hooks:
+      - id: ggshield
+        language_version: python3
+        stages: [pre-commit]
+  - repo: local
+    hooks:
+      - id: jfrog
+        language: pygrep
         name: jfrog check
         entry: jfrog
-        language: pygrep
         types: [text]
+        exclude: ^\.pre-commit-config\.yaml$
