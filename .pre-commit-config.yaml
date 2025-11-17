@@ -1,0 +1,7 @@
+-   repo: local
+    hooks:
+    -   id: jfrog
+        name: jfrog check
+        entry: jfrog
+        language: pygrep
+        types: [text]
