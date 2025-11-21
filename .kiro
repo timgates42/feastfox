@@ -1,0 +1,53 @@
+# Kiro Instructions for FeastFox
+
+## Build & Test CI Loop
+
+Before completing any code changes, ALWAYS run the following validation steps:
+
+### Full CI Check
+```bash
+devbox run app:lint
+devbox run app:build
+```
+
+### Individual Checks (when needed)
+```bash
+# Frontend only
+devbox run app:lint:fe
+devbox run app:build:fe
+
+# Backend only
+devbox run app:lint:be
+devbox run app:build:be
+```
+
+### Available Commands
+
+**CI/Build:**
+- `devbox run app:build` - Build frontend and backend
+- `devbox run app:build:fe` - Build frontend only
+- `devbox run app:build:be` - Build backend only
+- `devbox run app:lint` - Lint frontend and backend
+- `devbox run app:lint:fe` - Lint frontend only
+- `devbox run app:lint:be` - Lint backend only
+- `devbox run app:format` - Format frontend and backend
+- `devbox run app:test` - Run tests (when configured)
+
+**Development:**
+- `devbox run app:dev` - Run frontend and backend together (connected)
+- `devbox run app:dev:fe` - Run frontend only with mock backend
+- `devbox run app:dev:fe:connected` - Run frontend connected to real backend
+- `devbox run app:dev:be` - Run backend only
+
+## Project Context
+
+- Frontend: React + TypeScript + Vite (port 5173)
+- Backend: FastAPI + Python 3.11 (port 8000)
+- Environment: Managed with devbox
+
+## Code Modification Rules
+
+1. Always validate syntax and build after changes
+2. Maintain TypeScript strict mode compliance
+3. Follow existing code patterns and structure
+4. Keep dependencies minimal

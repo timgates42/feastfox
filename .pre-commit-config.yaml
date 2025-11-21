@@ -1,11 +1,11 @@
 ---
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.0  # Ruff Version
+    rev: v0.14.5  # Ruff Version
     hooks:
       - id: ruff
   - repo: https://github.com/gitguardian/ggshield
-    rev: v1.43.0  # GGShield Version
+    rev: v1.45.0  # GGShield Version
     hooks:
       - id: ggshield
         language_version: python3
@@ -18,3 +18,7 @@ repos:
         entry: jfrog
         types: [text]
         exclude: ^\.pre-commit-config\.yaml$
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0  # Pre Commit Version
+    hooks:
+      - id: check-merge-conflict

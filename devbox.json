@@ -25,17 +25,65 @@
       "setup": [
         "npm install --prefix frontend",
         "pip install -r backend/requirements.txt"
+      ],
+      "app:build": [
+        "devbox run app:build:fe",
+        "devbox run app:build:be"
+      ],
+      "app:build:fe": [
+        "cd frontend && npm run build"
+      ],
+      "app:build:be": [
+        "cd backend && python -m py_compile main.py"
+      ],
+      "app:lint": [
+        "devbox run app:lint:fe",
+        "devbox run app:lint:be"
+      ],
+      "app:lint:fe": [
+        "cd frontend && npm run lint"
+      ],
+      "app:lint:be": [
+        "cd backend && python -m py_compile main.py"
+      ],
+      "app:format": [
+        "devbox run app:format:fe",
+        "devbox run app:format:be"
+      ],
+      "app:format:fe": [
+        "cd frontend && npm run lint"
+      ],
+      "app:format:be": [
+        "echo 'Backend formatting not configured'"
+      ],
+      "app:test": [
+        "devbox run app:test:fe",
+        "devbox run app:test:be"
+      ],
+      "app:test:fe": [
+        "echo 'Frontend tests not configured'"
+      ],
+      "app:test:be": [
+        "echo 'Backend tests not configured'"
+      ],
+      "app:dev": [
+        "echo 'Starting frontend and backend together (connected mode)...'",
+        "echo 'Backend will run on http://localhost:8000'",
+        "echo 'Frontend will run on http://localhost:5173'",
+        "devbox services up"
+      ],
+      "app:dev:fe": [
+        "echo 'Starting frontend with mock backend...'",
+        "cd frontend && VITE_USE_MOCK=true npm run dev"
+      ],
+      "app:dev:fe:connected": [
+        "echo 'Starting frontend connected to backend...'",
+        "cd frontend && VITE_USE_MOCK=false npm run dev"
+      ],
+      "app:dev:be": [
+        "echo 'Starting backend only...'",
+        "cd backend && ../.venv/bin/python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000"
       ]
-    }
-  },
-  "services": {
-    "frontend": {
-      "command": "cd frontend && npm run dev -- --host 0.0.0.0",
-      "depends_on": []
-    },
-    "backend": {
-      "command": "cd backend && python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000",
-      "depends_on": []
     }
   }
 }
