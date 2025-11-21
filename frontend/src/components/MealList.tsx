@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Card, CardBody, Input, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from '@nextui-org/react';
+import { Button, Card, CardBody, Input, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from '@heroui/react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getMeals, createMeal, updateMeal, deleteMeal } from '../services/api';
 import type { Meal, MealCreate } from '../types/dinner';
@@ -13,6 +13,8 @@ export function MealList({ onBack }: MealListProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [editingMeal, setEditingMeal] = useState<Meal | null>(null);
   const [formData, setFormData] = useState<MealCreate>({ meal: '', cuisine: '', reason: '' });
+
+  console.log('MealList render - isOpen:', isOpen);
 
   const { data: meals = [], isLoading } = useQuery({
     queryKey: ['meals'],
@@ -50,14 +52,20 @@ export function MealList({ onBack }: MealListProps) {
   };
 
   const handleAdd = () => {
+    console.log('handleAdd called - isOpen before:', isOpen);
     resetForm();
+    console.log('handleAdd - calling onOpen');
     onOpen();
+    console.log('handleAdd - onOpen called, isOpen after:', isOpen);
   };
 
   const handleEdit = (meal: Meal) => {
+    console.log('handleEdit called - isOpen before:', isOpen, 'meal:', meal);
     setEditingMeal(meal);
     setFormData({ meal: meal.meal, cuisine: meal.cuisine, reason: meal.reason });
+    console.log('handleEdit - calling onOpen');
     onOpen();
+    console.log('handleEdit - onOpen called, isOpen after:', isOpen);
   };
 
   const handleSubmit = () => {
@@ -112,6 +120,7 @@ export function MealList({ onBack }: MealListProps) {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalContent>
+          {console.log('Modal rendering - isOpen:', isOpen)}
           <ModalHeader>{editingMeal ? 'Edit Meal' : 'Add New Meal'}</ModalHeader>
           <ModalBody>
             <Input

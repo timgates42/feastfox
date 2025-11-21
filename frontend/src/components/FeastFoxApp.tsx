@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Card, CardHeader, CardBody, CardFooter, Button, Chip } from '@nextui-org/react';
+import { Card, CardHeader, CardBody, CardFooter, Button, Chip } from '@heroui/react';
 import { useQuery } from '@tanstack/react-query';
 import { getDinnerDecision } from '../services/api';
 import { mockDinnerDecision } from '../services/mock';
@@ -90,7 +90,7 @@ export function FeastFoxApp() {
       </Card>
 
       <div className="text-center text-small text-default-400">
-        <p>Built with React, NextUI, and TanStack Query</p>
+        <p>Built with React, HeroUI, and TanStack Query</p>
       </div>
     </div>
   );
