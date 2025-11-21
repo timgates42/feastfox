@@ -1,6 +1,7 @@
 import type { DinnerDecision, Meal, MealCreate } from '../types/dinner';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true';
+const API_BASE_URL = USE_MOCK ? '' : (import.meta.env.VITE_API_URL || 'http://localhost:8000');
 
 export async function getDinnerDecision(): Promise<DinnerDecision> {
   const response = await fetch(`${API_BASE_URL}/api/dinner/decision`);

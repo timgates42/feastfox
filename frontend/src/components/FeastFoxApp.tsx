@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Card, CardHeader, CardBody, CardFooter, Button, Chip } from '@heroui/react';
 import { useQuery } from '@tanstack/react-query';
 import { getDinnerDecision } from '../services/api';
-import { mockDinnerDecision } from '../services/mock';
 import { MealList } from './MealList';
 
 const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true';
@@ -13,7 +12,7 @@ export function FeastFoxApp() {
 
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['dinnerDecision', refreshKey],
-    queryFn: USE_MOCK ? mockDinnerDecision : getDinnerDecision,
+    queryFn: getDinnerDecision,
   });
 
   const handleNewDecision = () => {
