@@ -118,33 +118,37 @@ export function MealList({ onBack }: MealListProps) {
         </CardBody>
       </Card>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onOpenChange={onClose}>
         <ModalContent>
-          {console.log('Modal rendering - isOpen:', isOpen)}
-          <ModalHeader>{editingMeal ? 'Edit Meal' : 'Add New Meal'}</ModalHeader>
-          <ModalBody>
-            <Input
-              label="Meal Name"
-              value={formData.meal}
-              onChange={(e) => setFormData({ ...formData, meal: e.target.value })}
-            />
-            <Input
-              label="Cuisine"
-              value={formData.cuisine}
-              onChange={(e) => setFormData({ ...formData, cuisine: e.target.value })}
-            />
-            <Input
-              label="Reason"
-              value={formData.reason}
-              onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
-            />
-          </ModalBody>
-          <ModalFooter>
-            <Button variant="light" onPress={onClose}>Cancel</Button>
-            <Button color="primary" onPress={handleSubmit}>
-              {editingMeal ? 'Update' : 'Create'}
-            </Button>
-          </ModalFooter>
+          {(onClose) => (
+            <>
+              {console.log('Modal rendering - isOpen:', isOpen)}
+              <ModalHeader>{editingMeal ? 'Edit Meal' : 'Add New Meal'}</ModalHeader>
+              <ModalBody>
+                <Input
+                  label="Meal Name"
+                  value={formData.meal}
+                  onChange={(e) => setFormData({ ...formData, meal: e.target.value })}
+                />
+                <Input
+                  label="Cuisine"
+                  value={formData.cuisine}
+                  onChange={(e) => setFormData({ ...formData, cuisine: e.target.value })}
+                />
+                <Input
+                  label="Reason"
+                  value={formData.reason}
+                  onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
+                />
+              </ModalBody>
+              <ModalFooter>
+                <Button variant="light" onPress={onClose}>Cancel</Button>
+                <Button color="primary" onPress={handleSubmit}>
+                  {editingMeal ? 'Update' : 'Create'}
+                </Button>
+              </ModalFooter>
+            </>
+          )}
         </ModalContent>
       </Modal>
     </div>
