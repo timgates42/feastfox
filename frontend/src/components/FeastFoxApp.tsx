@@ -3,11 +3,13 @@ import { Card, CardHeader, CardBody, CardFooter, Button, Chip } from '@nextui-or
 import { useQuery } from '@tanstack/react-query';
 import { getDinnerDecision } from '../services/api';
 import { mockDinnerDecision } from '../services/mock';
+import { MealList } from './MealList';
 
 const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true';
 
 export function FeastFoxApp() {
   const [refreshKey, setRefreshKey] = useState(0);
+  const [view, setView] = useState<'home' | 'meals'>('home');
 
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['dinnerDecision', refreshKey],
@@ -18,6 +20,10 @@ export function FeastFoxApp() {
     setRefreshKey((prev) => prev + 1);
     refetch();
   };
+
+  if (view === 'meals') {
+    return <MealList onBack={() => setView('home')} />;
+  }
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-2xl">
@@ -64,7 +70,7 @@ export function FeastFoxApp() {
             </div>
           )}
         </CardBody>
-        <CardFooter className="flex justify-center">
+        <CardFooter className="flex justify-center gap-2">
           <Button
             color="primary"
             size="lg"
@@ -72,6 +78,13 @@ export function FeastFoxApp() {
             isLoading={isLoading}
           >
             {isLoading ? 'Deciding...' : '🎲 Get New Suggestion'}
+          </Button>
+          <Button
+            variant="bordered"
+            size="lg"
+            onClick={() => setView('meals')}
+          >
+            Edit Meals
           </Button>
         </CardFooter>
       </Card>
