@@ -1,10 +1,20 @@
 version: "0.5"
 
 processes:
-  backend:
-    command: cd backend && ../.venv/bin/python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000
+  dynamodb:
+    command: |
+      mkdir -p .dynamodb
+      docker run --rm -p 8001:8000 -v $(pwd)/.dynamodb:/data amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -dbPath /data
     availability:
       restart: on_failure
+  
+  backend:
+    command: sleep 5 && cd backend && DYNAMODB_ENDPOINT=http://localhost:8001 ../.venv/bin/python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000
+    availability:
+      restart: on_failure
+    depends_on:
+      dynamodb:
+        condition: process_started
     
   frontend:
     command: cd frontend && VITE_USE_MOCK=false npm run dev -- --host 0.0.0.0
