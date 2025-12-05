@@ -1,7 +1,7 @@
 ---
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.6  # Ruff Version
+    rev: v0.14.8  # Ruff Version
     hooks:
       - id: ruff
   - repo: https://github.com/gitguardian/ggshield
