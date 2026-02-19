@@ -1,11 +1,11 @@
 ---
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.0  # Ruff Version
+    rev: v0.15.1  # Ruff Version
     hooks:
       - id: ruff
   - repo: https://github.com/gitguardian/ggshield
-    rev: v1.47.0  # GGShield Version
+    rev: v1.48.0  # GGShield Version
     hooks:
       - id: ggshield
         language_version: python3
